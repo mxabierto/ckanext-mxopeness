@@ -5,13 +5,13 @@
    {% block secondary_help_content %}
    {% endblock %}
 
-  {% snippet 'package/snippets/openess.html', pkg=pkg %}
 
   {% block package_organization %}
     {% if pkg.organization %}
       {% set org = h.get_organization(pkg.organization.name) %}
       {% snippet "snippets/organization.html", organization=org, has_context_title=true %}
     {% endif %}
+    {% snippet 'package/snippets/openess.html', pkg=pkg %}
   {% endblock %}
 
   {% block package_social %}
