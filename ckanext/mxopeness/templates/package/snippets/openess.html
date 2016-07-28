@@ -1,6 +1,6 @@
 <h4>Compartir en</h4>
 <div>
-	{% for extra in h.sorted_extras(pkg_dict.extras) %}
+	{% for extra in h.sorted_extras(pkg.extras) %}
 		{% if extra == 'calificacion' %}
 			Medalla de {{extra}}. <a href="/metodologia/">Metodologia</a>.
 		{% endif %}
