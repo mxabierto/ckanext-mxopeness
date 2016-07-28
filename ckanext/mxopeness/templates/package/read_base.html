@@ -1,13 +1,11 @@
-{% extends "package/base.html" %}
+{% ckan_extends %}
 
 {% block secondary_content %}
 
    {% block secondary_help_content %}
    {% endblock %}
 
-  {% block package_info %}
-    {% snippet 'package/snippets/openess.html', pkg=pkg %}
-  {% endblock %}
+  {% snippet 'package/snippets/openess.html', pkg=pkg %}
 
   {% block package_organization %}
     {% if pkg.organization %}
