@@ -1,0 +1,6 @@
+
+        [ckan.plugins]
+        mxopeness=ckanext.mxopeness.plugin:MxopenessPlugin
+	[babel.extractors]
+	ckan = ckan.lib.extract:extract_ckan
+    
