@@ -2,9 +2,9 @@
 <div>
     {% for extra in h.sorted_extras(pkg.extras) %}
     	{# {% set key, value = extra %} #}
-        {# {% if key == 'calificacion' %} #}
+        {% if key == 'calificacion' %}
             {# <p>Medalla de {{value}}. <a href="/metodologia/">Metodologia</a></p> #}
-            <p> <a href="/metodologia/">Metodologia</a></p>
-        {# {% endif %} #}
+        {% endif %}
     {% endfor %}
+    <p><a href="/metodologia/">Metodologia</a></p>
 </div>

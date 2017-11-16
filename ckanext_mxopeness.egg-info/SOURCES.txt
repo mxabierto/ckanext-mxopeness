@@ -5,6 +5,8 @@ setup.py
 ckanext/__init__.py
 ckanext/mxopeness/__init__.py
 ckanext/mxopeness/plugin.py
+ckanext/mxopeness/templates/package/read.html
+ckanext/mxopeness/templates/package/snippets/openess.html
 ckanext/mxopeness/tests/__init__.py
 ckanext/mxopeness/tests/test_plugin.py
 ckanext_mxopeness.egg-info/PKG-INFO
