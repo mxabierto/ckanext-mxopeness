@@ -1,10 +1,42 @@
 <h4>Calidad</h4>
 <div>
-    {% for extra in h.sorted_extras(pkg.extras) %}
-    	{# {% set key, value = extra %} #}
-        {% if key == 'calificacion' %}
-            {# <p>Medalla de {{value}}. <a href="/metodologia/">Metodologia</a></p> #}
-        {% endif %}
-    {% endfor %}
-    <p><a href="/metodologia/">Metodologia</a></p>
+    <p id="quality-score" style="font-weight: bold; text-align: center; font-size: 16px; background-color: #0c9; color: white; padding: 5px;"></p>
+    <p style="text-align: center;"><a href="https://github.com/mxabierto/dora/blob/master/src/dora/p/calificacion.clj">¿Como se califica este conjunto?</a></p>
+    <script>
+        var xhr;
+        if (window.XMLHttpRequest) xhr = new XMLHttpRequest();
+        else xhr = new ActiveXObject("Microsoft.XMLHTTP");
+
+        xhr.open('GET', '{{h.get_data_fusion_endpoint()}}/{{h.slugify_text(pkg.name)}}', false);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState===4 && xhr.status===200) {
+                var response = JSON.parse(xhr.responseText).distribution,
+                    dataset = {},
+                    calificaion = "BAJA";
+
+                if(response.results !== null){
+                    dataset = response.results[0];
+                    switch(dataset.calificacion){
+                        case "oro":
+                            calificaion = "ORO";
+                            break;
+                        case "plata":
+                            calificaion = "PLATA";
+                            break;
+                        case "bronce":
+                            calificaion = "BRONCE";
+                            break
+                        default:
+                            calificaion = "BAJA";
+                    }
+                }
+
+                document.getElementById('quality-score').innerHTML = calificaion;
+            } else {
+                document.getElementById('quality-score').innerHTML = "BRONCE";
+            }
+        }
+
+        xhr.send();
+    </script>
 </div>
