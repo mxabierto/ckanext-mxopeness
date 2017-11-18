@@ -11,7 +11,6 @@
       {% set org = h.get_organization(pkg.organization.name) %}
       {% snippet "snippets/organization.html", organization=org, has_context_title=true %}
     {% endif %}
-    {% snippet 'package/snippets/openess.html', pkg=pkg %}
   {% endblock %}
 
   {% block package_social %}
