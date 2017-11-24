@@ -15,21 +15,26 @@
                     calificaion = "BAJA";
 
                 if(response.results !== null){
-                    dataset = response.results[0];
-                    switch(dataset.calificacion){
-                        case "oro":
-                            calificaion = "ORO";
-                            break;
-                        case "plata":
-                            calificaion = "PLATA";
-                            break;
-                        case "bronce":
-                            calificaion = "BRONCE";
-                            break
-                        default:
-                            calificaion = "BAJA";
+                    if(response.results.length === 0){
+                        document.getElementById('quality-score').innerHTML = "Está en proceso de evaluación";
+                        return false;
+                    } else {
+                        dataset = response.results[0];
+                        switch(dataset.calificacion){
+                            case "oro":
+                                calificaion = "ORO";
+                                break;
+                            case "plata":
+                                calificaion = "PLATA";
+                                break;
+                            case "bronce":
+                                calificaion = "BRONCE";
+                                break
+                            default:
+                                calificaion = "BAJA";
+                        }    
                     }
-                }
+               }
 
                 document.getElementById('quality-score').innerHTML = calificaion;
             } else {
