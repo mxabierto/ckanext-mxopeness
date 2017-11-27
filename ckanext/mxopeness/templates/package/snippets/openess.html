@@ -1,43 +1,43 @@
 <h4>Calidad</h4>
 <div>
-  <p id="quality-score" style="font-weight: bold; text-align: center; font-size: 16px; background-color: #0c9; color: white; padding: 5px;"></p>
-  <p style="text-align: center;"><a href="https://github.com/mxabierto/dora/blob/master/src/dora/p/calificacion.clj">¿Como se califica este recurso?</a></p>
-  <script>
-    var xhr;
-    if (window.XMLHttpRequest) xhr = new XMLHttpRequest();
-    else xhr = new ActiveXObject("Microsoft.XMLHTTP");
-    xhr.open('GET', '{{h.get_data_fusion_endpoint()}}?ckan.resource.name={{h.resource_display_name(res)}}', false);
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        var response = JSON.parse(xhr.responseText),
-          dataset = {},
-          calificaion = "BAJA";
-        if (response.results !== null) {
-          if (response.results.length === 0) {
-            document.getElementById('quality-score').innerHTML = "Está en proceso de evaluación";
-            return false;
-          } else {
-            dataset = response.results[0];
-            switch (dataset.calificacion) {
-              case "oro":
-                calificaion = "ORO";
-                break;
-              case "plata":
-                calificaion = "PLATA";
-                break;
-              case "bronce":
-                calificaion = "BRONCE";
-                break
-              default:
-                calificaion = "BAJA";
+    <p id="quality-score" style="font-weight: bold; text-align: center; font-size: 16px; background-color: #0c9; color: white; padding: 5px;"></p>
+    <p style="text-align: center;"><a href="https://github.com/mxabierto/dora/blob/master/src/dora/p/calificacion.clj">¿Como se califica este recurso?</a></p>
+    <script>
+        var xhr;
+        if (window.XMLHttpRequest) xhr = new XMLHttpRequest();
+        else xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        xhr.open('GET', '{{h.get_data_fusion_endpoint()}}?ckan.resource.name={{h.resource_display_name_clean(res)}}', false);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState===4 && xhr.status===200) {
+                var response = JSON.parse(xhr.responseText),
+                    dataset = {},
+                    calificaion = "BAJA";
+                if(response.results !== null){
+                    if(response.results.length === 0){
+                        document.getElementById('quality-score').innerHTML = "Está en proceso de evaluación";
+                        return false;
+                    } else {
+                        dataset = response.results[0];
+                        switch(dataset.calificacion){
+                            case "oro":
+                                calificaion = "ORO";
+                                break;
+                            case "plata":
+                                calificaion = "PLATA";
+                                break;
+                            case "bronce":
+                                calificaion = "BRONCE";
+                                break
+                            default:
+                                calificaion = "BAJA";
+                        }
+                    }
+               }
+                document.getElementById('quality-score').innerHTML = calificaion;
+            } else {
+                document.getElementById('quality-score').innerHTML = "BRONCE";
             }
-          }
         }
-        document.getElementById('quality-score').innerHTML = calificaion;
-      } else {
-        document.getElementById('quality-score').innerHTML = "BRONCE";
-      }
-    }
-    xhr.send();
-  </script>
+        xhr.send();
+    </script>
 </div>
